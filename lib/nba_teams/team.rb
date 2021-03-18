@@ -17,6 +17,7 @@ class NbaTeams::Team
   end
   
   def player 
+    self.player.name
   end
   
 end
