@@ -1,0 +1,2 @@
+class NbaTeams::Team 
+end
