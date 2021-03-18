@@ -14,8 +14,8 @@ Classes
   -teams
   -players (roster)
   -players' stat
-2. teams
-3. roster
-4. player
-5. 
+
 Cli
+
+team  with has a name, players
+players with has a team and stats
