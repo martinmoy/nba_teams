@@ -1,8 +1,8 @@
 require_relative "nba_teams/version"
-require_relative 'nba_teams/cli'
-require_relative 'nba_teams/team'
-require_relative 'nba_teams/scraper'
-require_relative 'nba_teams/player'
+require_relative 'nba_teams/cli.rb'
+require_relative 'nba_teams/team.rb'
+require_relative 'nba_teams/scraper.rb'
+require_relative 'nba_teams/player.rb'
 
 require 'pry'
 require 'nokogiri'
