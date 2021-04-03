@@ -1,5 +1,5 @@
 class NbaTeams::Player
-  attr_accessor :name, :team, :stats, :url 
+  attr_accessor :name, :team, :url
   
   @@all = []
   
@@ -23,22 +23,8 @@ class NbaTeams::Player
     @team.player << self unless @team.player.include?(self)
   end
 
-  def point
-  end
-
-  def rebound 
-  end
   
-  def assist
-  end
 
-  def weight
-  end
 
-  def height
-  end
-
-  def age
-  end
   
 end

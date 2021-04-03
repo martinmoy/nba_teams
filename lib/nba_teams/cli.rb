@@ -3,9 +3,12 @@ class NbaTeams::CLI
   
   def call 
     intro 
-    list_teams
-    select_team
-    select_player
+    @input = ""
+    until @input  == "exit"
+      list_teams
+      select_team
+      select_player
+    end
     goodbye
   end
   
@@ -43,7 +46,6 @@ class NbaTeams::CLI
     input.to_i <= data.length && input.to_i > 0
   end
   
-  
   def list_roster(selected_team)
     team_select = @teams[selected_team-1]
     team_select.get_player
@@ -54,7 +56,6 @@ class NbaTeams::CLI
     @roster.each.with_index(1) do |player, index|
       puts "#{index}. #{player.name}"
       puts "#{player.team.name}"
-      puts "#{player.url}"
     end
     puts " "
     puts "Please input the number for the player you want to view."
@@ -64,21 +65,10 @@ class NbaTeams::CLI
   def select_player
     input = gets.strip.to_i
     if valid_input(input, @roster)
-      scrape_stats
-      list_stats
+      open_url(input)
     else
       puts "Please input a number from 1 to #{@roster.size}"
       select_player
-    end
-  end
-  
-  def scrape_stats
-    @stat = ["chicken", " game"]
-  end
-  
-  def list_stats
-    @stat.each.with_index(1) do |stats, index|
-      puts "#{index}. #{stats}"
     end
   end
   
@@ -87,6 +77,8 @@ class NbaTeams::CLI
     puts "see you later"
   end
 
-
+  def open_url(input)
+    `open "#{@roster[input-1].url}"`
+  end
 
 end
