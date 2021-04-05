@@ -2,26 +2,26 @@ require 'pry'
 class NbaTeams::CLI 
   
   def call 
-    intro 
-    @input = ""
-    until @input  == "exit"
-      list_teams
-      select_team
-      select_player
-    end
-    goodbye
+    intro   
+    cycle
   end
   
   def intro 
     current_year = Time.now.year
     puts "Welcome to #{current_year}'s NBA Roster"
     puts "Here is the teams in the NBA"
-    puts "Which team's roster would you to browse? "
+    puts "Which team's roster would you like to browse? "
     scrape_teams
   end
   
   def scrape_teams
     @teams = NbaTeams::Team.all
+  end
+  
+  def cycle
+    list_teams
+    select_team
+    select_player
   end
   
   def list_teams
@@ -33,9 +33,9 @@ class NbaTeams::CLI
   end
   
   def select_team 
-    selected_team = gets.strip.to_i
-    if valid_input(selected_team, @teams)
-      list_roster(selected_team)
+    input = gets.strip.to_i
+    if valid_input(input, @teams)
+      list_roster(input)
     else
       puts "Please input a number from 1 to #{@teams.size}"
       select_team
@@ -46,16 +46,17 @@ class NbaTeams::CLI
     input.to_i <= data.length && input.to_i > 0
   end
   
-  def list_roster(selected_team)
-    team_select = @teams[selected_team-1]
-    team_select.get_player
+  def list_roster(input)
+    @team_select = @teams[input-1]
+    @team_select.get_player
     puts " "
     puts " "
     # added this line to remove duplicates
-    @roster = team_select.player.uniq{|t| t.name}
+    @roster = @team_select.player.uniq{|t| t.name}
+    puts "Team : #{@team_select.name}"
+    puts " "
     @roster.each.with_index(1) do |player, index|
       puts "#{index}. #{player.name}"
-      puts "#{player.team.name}"
     end
     puts " "
     puts "Please input the number for the player you want to view."
@@ -75,10 +76,26 @@ class NbaTeams::CLI
   def goodbye
     puts " "
     puts "see you later"
+    exit
   end
 
   def open_url(input)
     `open "#{@roster[input-1].url}"`
+    puts "Type 'team' to see the list of all nba teams again."
+    puts "Type 'exit' to end the program."
+
+    input = gets.strip.downcase
+    if input == "team" 
+      cycle
+    elsif  input == "exit"
+      goodbye
+    else
+      puts ""
+      puts "I don't understand that answer."
+      puts ""
+      puts "Type 'team' to see the list of all nba teams again."
+      puts "Type 'exit' to end the program."
+    end
   end
 
 end
