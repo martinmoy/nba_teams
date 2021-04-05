@@ -22,5 +22,4 @@ class NbaTeams::Team
     NbaTeams::Scraper.scrape_player(self) if @player.empty?
   end
 
-
 end

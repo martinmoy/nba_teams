@@ -18,6 +18,5 @@ class NbaTeams::Scraper
           NbaTeams::Player.new(name, team, url)
         end 
     end
-
     
 end

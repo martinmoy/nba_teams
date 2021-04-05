@@ -22,9 +22,5 @@ class NbaTeams::Player
   def add_to_team
     @team.player << self unless @team.player.include?(self)
   end
-
-  
-
-
   
 end
