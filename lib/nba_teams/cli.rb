@@ -69,32 +69,34 @@ class NbaTeams::CLI
       open_url(input)
     else
       puts "Please input a number from 1 to #{@roster.size}"
-      select_player
     end
   end
   
   def goodbye
     puts " "
-    puts "see you later"
+    puts "See You Later"
     exit
   end
 
   def open_url(input)
     `open "#{@roster[input-1].url}"`
+    puts ""
+    puts ""
     puts "Type 'team' to see the list of all nba teams again."
     puts "Type 'exit' to end the program."
+    menu
+  end
 
+  def menu
     input = gets.strip.downcase
     if input == "team" 
       cycle
-    elsif  input == "exit"
+    elsif input == "exit"
       goodbye
     else
       puts ""
       puts "I don't understand that answer."
-      puts ""
-      puts "Type 'team' to see the list of all nba teams again."
-      puts "Type 'exit' to end the program."
+      menu
     end
   end
 
