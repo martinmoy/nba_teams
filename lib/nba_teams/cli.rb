@@ -96,6 +96,8 @@ class NbaTeams::CLI
     else
       puts ""
       puts "I don't understand that answer."
+      puts "Type 'team' to see the list of all nba teams again."
+      puts "Type 'exit' to end the program."
       menu
     end
   end
