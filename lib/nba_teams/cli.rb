@@ -25,7 +25,7 @@ class NbaTeams::CLI
   end
   
   def list_teams
-    puts " "
+    puts
     @teams.each.with_index(1) do |team, index|
       puts "#{index}. #{team.name}"
     end
@@ -49,16 +49,16 @@ class NbaTeams::CLI
   def list_roster(input)
     @team_select = @teams[input-1]
     @team_select.get_player
-    puts " "
-    puts " "
+    puts
+    puts
     # added this line to remove duplicates
     @roster = @team_select.player.uniq{|t| t.name}
     puts "Team : #{@team_select.name}"
-    puts " "
+    puts
     @roster.each.with_index(1) do |player, index|
       puts "#{index}. #{player.name}"
     end
-    puts " "
+    puts
     puts "Please input the number for the player you want to view."
     select_player
   end
@@ -73,15 +73,15 @@ class NbaTeams::CLI
   end
   
   def goodbye
-    puts " "
+    puts
     puts "See You Later"
     exit
   end
 
   def open_url(input)
     `open "#{@roster[input-1].url}"`
-    puts ""
-    puts ""
+    puts
+    puts
     puts "Type 'team' to see the list of all nba teams again."
     puts "Type 'exit' to end the program."
     menu
@@ -94,7 +94,7 @@ class NbaTeams::CLI
     elsif input == "exit"
       goodbye
     else
-      puts ""
+      puts
       puts "I don't understand that answer."
       puts "Type 'team' to see the list of all nba teams again."
       puts "Type 'exit' to end the program."
